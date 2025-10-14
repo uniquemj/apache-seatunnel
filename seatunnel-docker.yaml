@@ -1,0 +1,33 @@
+version: "3"
+networks:
+  custom_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.80.0/24
+  
+services:
+  mongo0:
+    image: mongo:6.0
+    container_name: mongo0
+    hostname: mongo0
+    ports:
+      - 27017:27017
+    networks:
+      custom_network:
+        ipv4_address: 172.25.80.4
+
+  mysql:
+    image: mysql:8.1
+    container_name: mysql0
+    hostname: mysql0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpw
+      MYSQL_DATABASE: stdb
+      MYSQL_USER: stuser
+      MYSQL_PASSWORD: stpw
+    ports:
+      - 3306:3306
+    networks:
+      custom_network:
+        ipv4_address: 172.25.80.7
