@@ -43,6 +43,11 @@ docker run --rm -it \
   ./bin/seatunnel.sh -m local -c /config/mongo-batch.conf
 ```
 
+Use this for `startup.mode ='Timestamp'`:
+```bash
+  docker run --rm -it --network=learn-seatunnel_custom_network -e STARTUP_TIMESTAMP=$(date +%s%3N) -v /<path-to-your-config-file>/:/config apache/seatunnel:2.3.12 ./bin/seatunnel.sh -m local -c /config/mongo_cdc-stream.conf
+```
+
 Example:
 ```bash
 docker run --rm -it \
